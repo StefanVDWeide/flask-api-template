@@ -113,9 +113,9 @@ flask run
 
 ---
 
-## Finally
+## Conclusion
 
-Hope this guide/template comes useful to you! If you have any feedback good or bad, please do let me know or feel free to fork and raise a PR. Would be happy to discuss possible improvements. Also, I have tried to leave useful comments within the code it self, so further explanation to what each module does can be found within the comments and docstrings.
+Hopefully this template will inspire you to use Flask for your future API projects. If you have any feedback please do let me know or feel free to fork and raise a PR. I'm actively trying to maintain this project so pull request are more than welcome.
 
 ### Todo and Improvements
 
