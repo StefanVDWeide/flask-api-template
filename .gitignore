@@ -149,3 +149,12 @@ gen
 app.db
 migrations/
 venv/
+!/app/tests/.coverage
+.coverage
+__pycache__/
+app/__pycache__/
+app/auth/__pycache__/
+app/errors/__pycache__/
+app/main/__pycache__/
+app/tests/.coverage
+app/tests/__pycache__/
