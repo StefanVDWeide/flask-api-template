@@ -9,6 +9,7 @@ token is stored and sent to the API is entirely up to the developer.
 * Application Factory Pattern Used
 * Authentication Functionality Using JWT
 * Basic Database Functionality Included (SQLite3)
+* Rate Limiting Functionality Based on Flask-Limiter For All The Routes In The Authentication Blueprint
 
 
 ### Application Structure
@@ -119,7 +120,7 @@ Hopefully this template will inspire you to use Flask for your future API projec
 
 ### Todo and Improvements
 
-- [] Add request limiter
+- [x] Add request limiter
 - [] Add tests
 - [] Add support for PostgreSQL database
 - [] Add support for a production server using gunicorn
