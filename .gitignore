@@ -148,3 +148,4 @@ gen
 .idea/
 app.db
 migrations/
+venv/

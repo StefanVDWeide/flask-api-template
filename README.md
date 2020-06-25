@@ -1,4 +1,4 @@
-# flask-api-template
+# Flask REST API Template
 A basic template to help kickstart development of a Flask API. This template is completely front-end independent and 
 leaves all decisions up to the developer. The template includes basic login functionality based on JWT checks. How this 
 token is stored and sent to the API is entirely up to the developer.
