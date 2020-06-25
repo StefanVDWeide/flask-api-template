@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app import db, jwt
+from app import db, jwt, limiter
 from app.auth import bp
 from app.models import Users, RevokedTokenModel
 from app.errors.handlers import bad_request, error_response
@@ -11,12 +11,12 @@ from datetime import datetime
 # Checks if the JWT is on the blacklisted token list
 @jwt.token_in_blacklist_loader
 def check_if_token_in_blacklist(decrypted_token):
-    jti = decrypted_token['jti']
+    jti = decrypted_token["jti"]
     return RevokedTokenModel.is_jti_blacklisted(jti)
 
 
 # Endpoint for adding a new user to the database
-@bp.route('/register', methods=['POST'])
+@bp.route("/register", methods=["POST"])
 def register():
 
     if not request.is_json:
@@ -71,25 +71,25 @@ def login():
     if user is None or not user.check_password(password):
         return error_response(401, message="Invalid username or password")
 
-    tokens = {'access_token': create_access_token(identity=user.id),
-              'refresh_token': create_refresh_token(identity=user.id)
+    tokens = {"access_token": create_access_token(identity=user.id),
+              "refresh_token": create_refresh_token(identity=user.id)
               }
 
     return jsonify(tokens), 200
 
 
 # Endpoint for requesting a new access token using a valid refresh token
-@bp.route("/refresh", methods=['POST'])
+@bp.route("/refresh", methods=["POST"])
 @jwt_refresh_token_required
 def refresh():
     user_id = get_jwt_identity()
     new_token = create_access_token(identity=user_id, fresh=False)
-    payload = {'access_token': new_token}
+    payload = {"access_token": new_token}
     return jsonify(payload), 200
 
 
 # Endpoint for requesting a new fresh token
-@bp.route('/fresh-login', methods=['POST'])
+@bp.route("/fresh-login", methods=["POST"])
 def fresh_login():
     data = request.get_json()
     username = data["username"]
@@ -103,25 +103,25 @@ def fresh_login():
         return error_response(401, message="Invalid username or password")
 
     new_token = create_access_token(identity=user.id, fresh=True)
-    payload = {'access_token': new_token}
+    payload = {"access_token": new_token}
     return jsonify(payload), 200
 
 
-# Endpoint for revoking the current user's access token
-@bp.route('/logout/token', methods=['DELETE'])
+# Endpoint for revoking the current user"s access token
+@bp.route("/logout/token", methods=["DELETE"])
 @jwt_required
 def logout_access_token():
-    jti = get_raw_jwt()['jti']
+    jti = get_raw_jwt()["jti"]
     revoked_token = RevokedTokenModel(jti=jti)
     revoked_token.add()
     return jsonify({"msg": "Successfully logged out"}), 200
 
 
-# Endpoint for revoking the current user's refresh token
-@bp.route('/logout/fresh', methods=['DELETE'])
+# Endpoint for revoking the current user"s refresh token
+@bp.route("/logout/fresh", methods=["DELETE"])
 @jwt_refresh_token_required
 def logout_refresh_token():
-    jti = get_raw_jwt()['jti']
+    jti = get_raw_jwt()["jti"]
     revoked_token = RevokedTokenModel(jti=jti)
     revoked_token.add()
     return jsonify({"msg": "Successfully logged out"}), 200
