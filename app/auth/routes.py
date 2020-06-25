@@ -17,7 +17,7 @@ def check_if_token_in_blacklist(decrypted_token):
 
 # Endpoint for adding a new user to the database
 @bp.route('/register', methods=['POST'])
-def api_register():
+def register():
 
     if not request.is_json:
         return bad_request("Missing JSON in request")
@@ -55,7 +55,7 @@ def api_register():
 
 # Endpoint for requesting a new access token via normal user login
 @bp.route("/login", methods=["POST"])
-def api_login():
+def login():
     if not request.is_json:
         return bad_request("Missing JSON in request")
 
@@ -71,8 +71,8 @@ def api_login():
     if user is None or not user.check_password(password):
         return error_response(401, message="Invalid username or password")
 
-    tokens = {'access_token': create_access_token(identity=username),
-              'refresh_token': create_refresh_token(identity=username)
+    tokens = {'access_token': create_access_token(identity=user.id),
+              'refresh_token': create_refresh_token(identity=user.id)
               }
 
     return jsonify(tokens), 200
@@ -81,16 +81,16 @@ def api_login():
 # Endpoint for requesting a new access token using a valid refresh token
 @bp.route("/refresh", methods=['POST'])
 @jwt_refresh_token_required
-def api_refresh():
-    current_username = get_jwt_identity()
-    new_token = create_access_token(identity=current_username, fresh=False)
-    ret = {'access_token': new_token}
-    return jsonify(ret), 200
+def refresh():
+    user_id = get_jwt_identity()
+    new_token = create_access_token(identity=user_id, fresh=False)
+    payload = {'access_token': new_token}
+    return jsonify(payload), 200
 
 
-# Endpoint for requesting a new refresh token
+# Endpoint for requesting a new fresh token
 @bp.route('/fresh-login', methods=['POST'])
-def api_fresh_login():
+def fresh_login():
     data = request.get_json()
     username = data["username"]
     password = data["password"]
@@ -102,15 +102,15 @@ def api_fresh_login():
     if user is None or not user.check_password(password):
         return error_response(401, message="Invalid username or password")
 
-    new_token = create_access_token(identity=username, fresh=True)
-    ret = {'access_token': new_token}
-    return jsonify(ret), 200
+    new_token = create_access_token(identity=user.id, fresh=True)
+    payload = {'access_token': new_token}
+    return jsonify(payload), 200
 
 
 # Endpoint for revoking the current user's access token
 @bp.route('/logout/token', methods=['DELETE'])
 @jwt_required
-def api_logout_access_token():
+def logout_access_token():
     jti = get_raw_jwt()['jti']
     revoked_token = RevokedTokenModel(jti=jti)
     revoked_token.add()
@@ -120,7 +120,7 @@ def api_logout_access_token():
 # Endpoint for revoking the current user's refresh token
 @bp.route('/logout/fresh', methods=['DELETE'])
 @jwt_refresh_token_required
-def api_logout_refresh_token():
+def logout_refresh_token():
     jti = get_raw_jwt()['jti']
     revoked_token = RevokedTokenModel(jti=jti)
     revoked_token.add()

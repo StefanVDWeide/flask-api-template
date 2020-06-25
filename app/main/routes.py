@@ -9,18 +9,18 @@ user_schema = UsersSchema(exclude=("email", "password_hash"))
 users_schema = UsersSchema(many=True, exclude=("email", "password_hash"))
 
 
-# Render main user calendar page
+# Let's users retrieve their own user information when logged in
 @bp.route('/', methods=['GET'])
 @jwt_required
-def api_main_calendar():
+def user_page():
     user = current_user
     return user_schema.jsonify(user)
 
 
-# Lets users go to a profile page
+# Lets users retrieve a user profile when logged in
 @bp.route('/user/<username>', methods=['GET'])
 @jwt_required
-def api_user(username):
+def get_user(username):
     user = Users.query.filter_by(username=username).first()
 
     if user is None:

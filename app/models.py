@@ -3,9 +3,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 
+# User loader function which uses the JWT identity to retrieve a user object. Method is called on protected routes
 @jwt.user_loader_callback_loader
 def user_loader_callback(identity):
-    return Users.query.filter_by(username=identity).first()
+    return Users.query.filter_by(id=identity).first()
 
 
 # defines the Users database table
