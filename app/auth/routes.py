@@ -95,7 +95,7 @@ def fresh_login():
     username = data["username"]
     password = data["password"]
 
-    if not username or password:
+    if not username or not password:
         return bad_request("Missing form parameter")
 
     user = Users.query.filter_by(username=username).first()
