@@ -3,12 +3,6 @@ from app import create_app, db
 from app.models import Users
 from config import Config
 
-import os
-import sys
-
-parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(parent_dir)
-
 
 class TestConfig(Config):
     TESTING = True
