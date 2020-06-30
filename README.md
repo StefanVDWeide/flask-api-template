@@ -121,6 +121,6 @@ Hopefully this template will inspire you to use Flask for your future API projec
 ### Todo and Improvements
 
 - [x] Add request limiter
-- [] Add tests
+- [x] Add tests
 - [] Add support for PostgreSQL database
 - [] Add support for a production server using gunicorn
