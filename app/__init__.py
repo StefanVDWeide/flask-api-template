@@ -39,7 +39,7 @@ def create_app(config_class=Config):
 
     from app.auth import bp as auth_bp
     # Set the rate limit for all routes in the auth_bp blueprint to 1 per second
-    limiter.limit("1 per second")(auth_bp)
+    limiter.limit("60 per minute")(auth_bp)
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
 
     from app.main import bp as main_bp
