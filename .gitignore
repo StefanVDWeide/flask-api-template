@@ -158,3 +158,5 @@ app/errors/__pycache__/
 app/main/__pycache__/
 app/tests/.coverage
 app/tests/__pycache__/
+/.env
+/.flaskenv
