@@ -1,7 +1,7 @@
 # Flask REST API Template
-A basic template to help kickstart development of a Flask API. This template is completely front-end independent and 
-leaves all decisions up to the developer. The template includes basic login functionality based on JWT checks. How this 
-token is stored and sent to the API is entirely up to the developer.
+A basic template to help kickstart development of a pure Flask API. This template is completely front-end independent 
+and leaves all decisions up to the developer. The template includes basic login functionality based on JWT checks. 
+How this token is stored and sent to the API is entirely up to the developer.
 
 ## Features
 * Minimal Flask 1.X App
@@ -10,6 +10,7 @@ token is stored and sent to the API is entirely up to the developer.
 * Authentication Functionality Using JWT
 * Basic Database Functionality Included (SQLite3)
 * Rate Limiting Functionality Based on Flask-Limiter For All The Routes In The Authentication Blueprint
+* Support for .env and .flaskenv files build in
 
 
 ### Application Structure
@@ -122,5 +123,6 @@ Hopefully this template will inspire you to use Flask for your future API projec
 
 - [x] Add request limiter
 - [x] Add tests
+- [x] Add support for enviroment variables
 - [] Add support for PostgreSQL database
 - [] Add support for a production server using gunicorn
