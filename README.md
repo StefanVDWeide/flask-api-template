@@ -4,8 +4,10 @@ and leaves all decisions up to the developer. The template includes basic login 
 How this token is stored and sent to the API is entirely up to the developer.
 
 ## Features
-* Minimal Flask 1.X App
-* App Structured Using Blueprints
+* Minimal Flask 2.X App
+* Async Functionallity
+* Integration With Redis For Background Tasks
+* App Structured Using Blueprints, Including Nested Blueprints
 * Application Factory Pattern Used
 * Authentication Functionality Using JWT
 * Basic Database Functionality Included (SQLite3)
@@ -40,7 +42,7 @@ projects system wide. Once you install [virtual env](https://virtualenv.pypa.io/
 your projects directory through your terminal, you can set up a virtual env with:
 
 ```bash
-virtualenv venv
+python3 -m venv .venv
 ```
 
 ### Dependency installations
@@ -119,10 +121,15 @@ flask run
 
 Hopefully this template will inspire you to use Flask for your future API projects. If you have any feedback please do let me know or feel free to fork and raise a PR. I'm actively trying to maintain this project so pull request are more than welcome.
 
-### Todo and Improvements
+### Todo's and Improvements
 
 - [x] Add request limiter
 - [x] Add tests
 - [x] Add support for enviroment variables
+- [] Add nested blueprints
+- [] Add async functionality
+- [] Add pydantic for data validation
+- [] Add pydantic for data validation
+- [] Add redis support and background workers
 - [] Add support for PostgreSQL database
 - [] Add support for a production server using gunicorn
