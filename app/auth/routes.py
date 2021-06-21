@@ -21,7 +21,7 @@ def check_if_token_in_blacklist(decrypted_token):
 
 
 # Endpoint for adding a new user to the database
-@bp.route("/register", methods=["POST"])
+@bp.post("/register")
 def register():
 
     if not request.is_json:
@@ -68,7 +68,7 @@ def register():
 
 
 # Endpoint for requesting a new access token via normal user login
-@bp.route("/login", methods=["POST"])
+@bp.post("/login")
 def login():
     if not request.is_json:
         return bad_request("Missing JSON in request")
@@ -94,7 +94,7 @@ def login():
 
 
 # Endpoint for requesting a new access token using a valid refresh token
-@bp.route("/refresh", methods=["POST"])
+@bp.post("/refresh")
 @jwt_required(refresh=True)
 def refresh():
     user_id = get_jwt_identity()
@@ -104,7 +104,7 @@ def refresh():
 
 
 # Endpoint for requesting a new fresh token
-@bp.route("/fresh-login", methods=["POST"])
+@bp.post("/fresh-login")
 def fresh_login():
     data = request.get_json()
     username = data["username"]
@@ -123,7 +123,7 @@ def fresh_login():
 
 
 # Endpoint for revoking the current user"s access token
-@bp.route("/logout/token", methods=["DELETE"])
+@bp.delete("/logout/token")
 @jwt_required()
 def logout_access_token():
     jti = get_jwt()["jti"]
@@ -133,7 +133,7 @@ def logout_access_token():
 
 
 # Endpoint for revoking the current user"s refresh token
-@bp.route("/logout/fresh", methods=["DELETE"])
+@bp.delete("/logout/fresh")
 @jwt_required(refresh=True)
 def logout_refresh_token():
     jti = get_jwt()["jti"]
