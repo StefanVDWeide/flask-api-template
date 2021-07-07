@@ -160,3 +160,10 @@ app/tests/.coverage
 app/tests/__pycache__/
 /.env
 /.flaskenv
+
+# VSCode
+.vscode
+.venv
+
+# Logs
+logs/
