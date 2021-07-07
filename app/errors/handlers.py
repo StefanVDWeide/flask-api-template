@@ -2,16 +2,45 @@ from flask import jsonify
 from werkzeug.http import HTTP_STATUS_CODES
 
 
-# A catch all function which returns the error code and message back to the user
-def error_response(status_code, message=None):
+def error_response(status_code: int, message=None) -> str:
+    """
+    A catch all function which returns the error code and message back to the user
+
+    Parameters
+    ----------
+    status_code : int
+        The HTTP status code
+    message : str, optional
+        The error message, by default None
+
+    Returns
+    -------
+    str
+        A JSON object containing the error information and HTTP code
+    """
     payload = {"error": HTTP_STATUS_CODES.get(status_code, "Unknown error")}
+
     if message:
         payload["msg"] = message
+
     response = jsonify(payload)
     response.status_code = status_code
+
     return response
 
 
-# Returns a 400 error code when a bad request has been made
-def bad_request(message):
+def bad_request(message: str) -> str:
+    """
+    Returns a 400 error code when a bad request has been made
+
+    Parameters
+    ----------
+    message : str
+        The error message
+
+    Returns
+    -------
+    str
+        A JSON object containing the error message and a 400 HTTP code
+    """
     return error_response(400, message)

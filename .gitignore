@@ -164,3 +164,6 @@ app/tests/__pycache__/
 # VSCode
 .vscode
 .venv
+
+# Logs
+logs/

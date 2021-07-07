@@ -5,9 +5,10 @@ How this token is stored and sent to the API is entirely up to the developer.
 
 ## Features
 * Minimal Flask 2.X App
-* Async Functionallity
+* Async/Await Functionallity
+* Basic Type Hints
 * Integration With Redis For Background Tasks
-* App Structured Using Blueprints, Including Nested Blueprints
+* App Structured Using Blueprints
 * Application Factory Pattern Used
 * Authentication Functionality Using JWT
 * Basic Database Functionality Included (SQLite3)
@@ -117,6 +118,10 @@ flask run
 
 ---
 
+## PostgreSQL
+
+## Gunicorn
+
 ## Conclusion
 
 Hopefully this template will inspire you to use Flask for your future API projects. If you have any feedback please do let me know or feel free to fork and raise a PR. I'm actively trying to maintain this project so pull request are more than welcome.
@@ -124,12 +129,16 @@ Hopefully this template will inspire you to use Flask for your future API projec
 ### Todo's and Improvements
 
 - [x] Add request limiter
-- [x] Add tests
 - [x] Add support for enviroment variables
-- [] Add nested blueprints
-- [] Add async functionality
-- [] Add pydantic for data validation
-- [] Add pydantic for data validation
-- [] Add redis support and background workers
-- [] Add support for PostgreSQL database
-- [] Add support for a production server using gunicorn
+- [x] Add async functionality
+- [X] Add marshmallow validation for payloads
+- [X] Add type hints
+- [X] Add redis support and background workers
+- [X] Add GitHub actions to run tests
+- [x] Add GitHub action to check requirements using Dependabot
+- [] Add tests for background tasks
+- [] Add instructions to deploy to a production
+
+
+## Acknowledgements
+[Flask Mega Guide - Miguel Grinberg](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)

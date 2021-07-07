@@ -25,7 +25,7 @@ class TestAuth(unittest.TestCase):
             json_data = resp.get_json()
 
             self.assertEqual(400, resp.status_code, msg=json_data)
-            self.assertEqual("Missing JSON in request", json_data["msg"])
+            self.assertEqual({"_schema": ["Invalid input type."]}, json_data["msg"])
 
     def test_other_errors(self):
         with self.app.test_client() as c:

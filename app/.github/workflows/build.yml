@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Python3
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x' 
+    - name: Install dependencies
+      run: pip3 install -r requirements.txt
+    - name: Run black to format code --check .
+      run: black --check .
+    - name: If needed, commit black changes to the pull request
+      if: failure()
+      run: |
+        black .
+        git config --global user.name 'autoblack'
+        git config --global user.email 'cclauss@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git checkout $GITHUB_HEAD_REF
+        git commit -am "fixup: Format Python code with Black"
+        git push
+    - name: Run flask8 to lint code
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Run unittests
+      run: python3 -m unittest discover -s app/tests/
+      env:
+        FLASK_ENV: testing
