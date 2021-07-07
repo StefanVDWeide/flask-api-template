@@ -37,7 +37,6 @@ def check_if_token_in_blacklist(jwt_header, jwt_data) -> bool:
     bool
         Returns True if the token is revoked, False otherwise
     """
-    print(jwt_data)
     jti = jwt_data["jti"]
     return RevokedTokenModel.is_jti_blacklisted(jti)
 
