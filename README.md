@@ -6,6 +6,7 @@ How this token is stored and sent to the API is entirely up to the developer.
 ## Features
 * Minimal Flask 2.X App
 * Async/Await Functionallity
+* Unit tests
 * Basic Type Hints
 * Integration With Redis For Background Tasks
 * App Structured Using Blueprints
@@ -18,13 +19,19 @@ How this token is stored and sent to the API is entirely up to the developer.
 
 ### Application Structure
 
-The API is divided in a three main blueprints `auth`, `errors` and `main`.
+The API is divided in six blueprints `auth`, `comments`, `errors`, `posts`, `tasks` and `users`.
 
 The `auth` blueprint is responsible for all the routes associated with user registration and authentication.
 
+The `comments` blueprint is responsible for handeling all requests related to comments, suchs as GET, POST and DELETE requests.
+
 The `errors` blueprint is used to catch all errors and return the correct information.
 
-The `main` blueprint is an (almost) empty blueprint used as a placeholder for the main functionality of applicatons based on this template. Currently there are two routes which return either information ahout the current user or a different user based on username.
+The `posts` blueprint, just like the `comments` one, is responsible for handeling all requests related to posts, suchs as GET, POST and DELETE requests.
+
+The `tasks` blueprint is responsible for requests related to asynchronous background tasks. Such as launching, retrieving the status of a specific task and retrieving all completed tasks.
+
+The `users` blueprint handles the user related requests. Currently there are two routes which return either information ahout the current user or a different user based on username.
 
 ## Installation
 
@@ -119,9 +126,10 @@ flask run
 ---
 
 ## PostgreSQL
+TODO
 
 ## Gunicorn
-
+TODO
 ## Conclusion
 
 Hopefully this template will inspire you to use Flask for your future API projects. If you have any feedback please do let me know or feel free to fork and raise a PR. I'm actively trying to maintain this project so pull request are more than welcome.
