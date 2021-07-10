@@ -4,7 +4,7 @@ appdirs==1.4.4
 asgiref==3.3.4
 async-timeout==3.0.1
 attrs==21.2.0
-black==21.5b1
+black==21.6b0
 certifi==2021.5.30
 chardet==4.0.0
 click==8.0.0
