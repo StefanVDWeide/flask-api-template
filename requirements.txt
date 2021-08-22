@@ -30,7 +30,7 @@ mccabe==0.6.1
 migrate==0.3.8
 multidict==5.1.0
 mypy-extensions==0.4.3
-pathspec==0.8.1
+pathspec==0.9.0
 pycodestyle==2.7.0
 pyflakes==2.3.1
 PyJWT==2.1.0
@@ -38,10 +38,10 @@ python-dateutil==2.8.1
 python-dotenv==0.18.0
 python-editor==1.0.4
 redis==3.5.3
-regex==2021.7.6
+regex==2021.8.21
 rq==1.9.0
 six==1.16.0
-SQLAlchemy==1.4.15
+SQLAlchemy==1.4.22
 toml==0.10.2
 typing-extensions==3.10.0.0
 urllib3==1.26.5
