@@ -24,13 +24,13 @@ Jinja2==3.0.0
 limits==1.5.1
 Mako==1.1.4
 MarkupSafe==2.0.0
-marshmallow==3.12.2
+marshmallow==3.13.0
 marshmallow-sqlalchemy==0.25.0
 mccabe==0.6.1
 migrate==0.3.8
 multidict==5.1.0
 mypy-extensions==0.4.3
-pathspec==0.8.1
+pathspec==0.9.0
 pycodestyle==2.7.0
 pyflakes==2.3.1
 PyJWT==2.1.0
@@ -41,7 +41,7 @@ redis==3.5.3
 regex==2021.7.6
 rq==1.9.0
 six==1.16.0
-SQLAlchemy==1.4.15
+SQLAlchemy==1.4.22
 toml==0.10.2
 typing-extensions==3.10.0.0
 urllib3==1.26.5
