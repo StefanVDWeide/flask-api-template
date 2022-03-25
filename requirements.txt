@@ -18,7 +18,7 @@ flask-marshmallow==0.14.0
 Flask-Migrate==3.1.0
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
-idna==3.2
+idna==3.3
 itsdangerous==2.0.1
 Jinja2==3.0.1
 limits==1.5.1
@@ -41,7 +41,7 @@ redis==3.5.3
 regex==2021.8.21
 rq==1.10.1
 six==1.16.0
-SQLAlchemy==1.4.23
+SQLAlchemy==1.4.32
 toml==0.10.2
 typing-extensions==4.1.1
 urllib3==1.26.6
