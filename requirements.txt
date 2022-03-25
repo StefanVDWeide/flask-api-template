@@ -22,7 +22,7 @@ idna==3.2
 itsdangerous==2.0.1
 Jinja2==3.0.1
 limits==2.4.0
-Mako==1.1.5
+Mako==1.2.0
 MarkupSafe==2.0.1
 marshmallow==3.13.0
 marshmallow-sqlalchemy==0.26.1
