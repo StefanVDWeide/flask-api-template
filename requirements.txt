@@ -1,7 +1,7 @@
 aiohttp==3.7.4.post0
 alembic==1.7.7
 appdirs==1.4.4
-asgiref==3.4.1
+asgiref==3.5.0
 async-timeout==3.0.1
 attrs==21.2.0
 black==22.1.0
