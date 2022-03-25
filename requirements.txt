@@ -25,7 +25,7 @@ limits==1.5.1
 Mako==1.1.5
 MarkupSafe==2.0.1
 marshmallow==3.13.0
-marshmallow-sqlalchemy==0.26.1
+marshmallow-sqlalchemy==0.28.0
 mccabe==0.6.1
 migrate==0.3.8
 multidict==6.0.2
@@ -41,7 +41,7 @@ redis==3.5.3
 regex==2021.8.21
 rq==1.10.1
 six==1.16.0
-SQLAlchemy==1.4.23
+SQLAlchemy==1.4.32
 toml==0.10.2
 typing-extensions==4.1.1
 urllib3==1.26.6
