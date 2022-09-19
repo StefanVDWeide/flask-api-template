@@ -18,7 +18,7 @@ flask-marshmallow==0.14.0
 Flask-Migrate==3.1.0
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
-idna==3.2
+idna==3.4
 itsdangerous==2.0.1
 Jinja2==3.0.1
 limits==2.4.0
