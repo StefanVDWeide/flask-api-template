@@ -14,7 +14,6 @@ def _set_task_progress(progress: int) -> None:
     """
     job = get_current_job()
     if job:
-
         job.meta["progress"] = progress
         job.save_meta()
 
