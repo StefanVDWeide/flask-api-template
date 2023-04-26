@@ -23,18 +23,21 @@ class TestAuth(unittest.TestCase):
     def test_400_error(self):
         with self.app.test_client() as c:
             # Make a post request to the register route without JSON data to trigger 400 error
-            resp = c.post("/api/auth/register", json={
+            resp = c.post(
+                "/api/auth/register",
+                json={
                     "username": 1,
                     "password": "secret",
                     "first_name": "tim",
                     "last_name": "apple",
                     "email": "tim@test.com",
-                })
+                },
+            )
 
             json_data = resp.get_json()
 
             self.assertEqual(400, resp.status_code, msg=json_data)
-            self.assertEqual({'username': ['Not a valid string.']}, json_data["msg"])
+            self.assertEqual({"username": ["Not a valid string."]}, json_data["msg"])
 
     def test_other_errors(self):
         with self.app.test_client() as c:
