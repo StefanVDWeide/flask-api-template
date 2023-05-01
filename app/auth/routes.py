@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import Response, request, jsonify
 
 from app import db, jwt
 from app.auth import bp
@@ -23,7 +23,8 @@ user_schema = UsersDeserializingSchema()
 @jwt.token_in_blocklist_loader
 def check_if_token_in_blacklist(jwt_header, jwt_data) -> bool:
     """
-    Helper function for checking if a token is present in the database revoked token table
+    Helper function for checking if a token is present in the database 
+    revoked token table
 
     Parameters
     ----------
@@ -42,7 +43,7 @@ def check_if_token_in_blacklist(jwt_header, jwt_data) -> bool:
 
 
 @bp.post("/register")
-def register() -> str:
+def register() -> tuple[Response, int] | Response:
     """
     Endpoint for adding a new user to the database
 
@@ -52,7 +53,7 @@ def register() -> str:
         A JSON object containing the success message
     """
     try:
-        result = user_schema.load(request.json)
+        result = user_schema.load(request.get_json())
 
     except ValidationError as e:
         return bad_request(e.messages)
@@ -63,7 +64,7 @@ def register() -> str:
     if Users.query.filter_by(email=result["email"]).first():
         return bad_request("Email already in use")
 
-    user = Users(
+    user: Users = Users(
         username=result["username"],
         first_name=result["first_name"],
         last_name=result["last_name"],
@@ -80,7 +81,7 @@ def register() -> str:
 
 
 @bp.post("/login")
-def login() -> str:
+def login() -> tuple[Response, int] | Response:
     """
     Endpoint for authorizing a user and retrieving a JWT
 
@@ -90,7 +91,7 @@ def login() -> str:
         A JSON object containing both the access JWT and the refresh JWT
     """
     try:
-        result = user_schema.load(request.json)
+        result = user_schema.load(request.get_json())
 
     except ValidationError as e:
         return bad_request(e.messages)
@@ -110,7 +111,7 @@ def login() -> str:
 
 @bp.post("/refresh")
 @jwt_required(refresh=True)
-def refresh() -> str:
+def refresh() -> tuple[Response, int]:
     """
     Endpoint in order to retrieve a new access JWT using the refresh JWT.
     A non-fresh access token is returned because the password is not involved in this transaction
@@ -128,7 +129,7 @@ def refresh() -> str:
 
 
 @bp.post("/fresh-login")
-def fresh_login() -> str:
+def fresh_login() -> tuple[Response, int] | Response:
     """
     Endpoint for requesting a new fresh access token
 
@@ -138,7 +139,7 @@ def fresh_login() -> str:
         A JSON object containing
     """
     try:
-        result = user_schema.load(request.json)
+        result = user_schema.load(request.get_json())
 
     except ValidationError as e:
         return bad_request(e.messages)
@@ -156,7 +157,7 @@ def fresh_login() -> str:
 
 @bp.delete("/logout/token")
 @jwt_required()
-def logout_access_token() -> str:
+def logout_access_token() -> tuple[Response, int]:
     """
     Endpoint for revoking the current user"s access token
 
@@ -174,7 +175,7 @@ def logout_access_token() -> str:
 
 @bp.delete("/logout/fresh")
 @jwt_required(refresh=True)
-def logout_refresh_token() -> str:
+def logout_refresh_token() -> tuple[Response, int]:
     """
     Endpoint for revoking the current user"s refresh token
 

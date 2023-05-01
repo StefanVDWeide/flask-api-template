@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, Response
 
 from app import db
 from app.posts import bp
@@ -20,7 +20,7 @@ posts_schema = PostsSchema(many=True)
 
 @bp.get("get/user/posts")
 @jwt_required()
-def get_posts() -> str:
+def get_posts() -> tuple[Response, int]:
     """
     Returns all posts submitted by the user making the request
 
@@ -36,7 +36,7 @@ def get_posts() -> str:
 
 @bp.get("/get/user/post/<int:id>")
 @jwt_required()
-def get_post_by_id(id: int) -> str:
+def get_post_by_id(id: int) -> tuple[Response, int] | Response:
     """
     Returns a specific post based on the ID in the URL
 
@@ -60,7 +60,7 @@ def get_post_by_id(id: int) -> str:
 
 @bp.post("/post/user/submit/post")
 @jwt_required()
-def submit_post() -> str:
+def submit_post() -> tuple[Response, int] | Response:
     """
     Lets users retrieve a user profile when logged in
 
@@ -72,7 +72,7 @@ def submit_post() -> str:
     try:
         result = post_schema.load(request.json)
     except ValidationError as e:
-        return bad_request(e.messages)
+        return bad_request(e.messages[0])
 
     post = Posts(body=result["body"], user=current_user)
 
@@ -84,7 +84,7 @@ def submit_post() -> str:
 
 @bp.delete("/delete/user/post/<int:id>")
 @jwt_required()
-def delete_post(id: int) -> str:
+def delete_post(id: int) -> tuple[Response, int] | Response:
     """
     Lets users retrieve a user profile when logged in
 
@@ -114,7 +114,7 @@ def delete_post(id: int) -> str:
 
 @bp.get("/get/user/posts/async")
 @jwt_required()
-async def async_posts_api_call() -> str:
+async def async_posts_api_call() -> tuple[dict, int]:
     """
     Calls two endpoints from an external API as async demo
 

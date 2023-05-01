@@ -1,8 +1,8 @@
-from flask import jsonify
+from flask import Response, jsonify
 from werkzeug.http import HTTP_STATUS_CODES
 
 
-def error_response(status_code: int, message=None) -> str:
+def error_response(status_code: int, message=None) -> Response:
     """
     A catch all function which returns the error code and message back to the user
 
@@ -29,7 +29,7 @@ def error_response(status_code: int, message=None) -> str:
     return response
 
 
-def bad_request(message: str) -> str:
+def bad_request(message: str) -> Response:
     """
     Returns a 400 error code when a bad request has been made
 

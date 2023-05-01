@@ -1,4 +1,5 @@
-from flask import request, jsonify
+from typing import Any
+from flask import request, jsonify, Response
 
 from app import db
 from app.comments import bp
@@ -20,7 +21,7 @@ comment_deserializing_schema = CommentsDeserializingSchema()
 
 @bp.get("/get/user/comments/post/<int:id>")
 @jwt_required()
-def get_comments_by_post_id(id: int) -> str:
+def get_comments_by_post_id(id: int) -> Response:
     """
     Endpoint for retrieving the user comments associated with a particular post
 
@@ -40,7 +41,7 @@ def get_comments_by_post_id(id: int) -> str:
 
 @bp.post("/post/user/submit/comment")
 @jwt_required()
-def submit_comment() -> str:
+def submit_comment() -> tuple[Response, int] | Response:
     """
     Lets users submit a comment regarding a post
 
@@ -50,7 +51,7 @@ def submit_comment() -> str:
         A JSON object containing a success message
     """
     try:
-        result = comment_deserializing_schema.load(request.json)
+        result = comment_deserializing_schema.load(request.get_json())
     except ValidationError as e:
         return bad_request(e.messages)
 
@@ -72,7 +73,7 @@ def submit_comment() -> str:
 
 @bp.delete("/delete/user/comment/<int:id>")
 @jwt_required()
-def delete_comment(id: int) -> str:
+def delete_comment(id: int) -> tuple[Response, int] | Response:
     """
     Lets users delete one of their own comments
 
@@ -102,7 +103,7 @@ def delete_comment(id: int) -> str:
 
 @bp.get("/get/user/comments/async")
 @jwt_required()
-async def async_comments_api_call() -> str:
+async def async_comments_api_call() -> dict[str, list[Any]]:
     """
     Calls two endpoints from an external API as async demo
 

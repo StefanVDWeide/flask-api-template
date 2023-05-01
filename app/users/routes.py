@@ -1,9 +1,10 @@
-from app.users import bp
+from flask import Response
+from flask_jwt_extended import current_user, jwt_required
+
+from app.errors.handlers import bad_request
 from app.models import Users
 from app.schemas import UsersSchema
-from app.errors.handlers import bad_request
-from flask_jwt_extended import jwt_required, current_user
-
+from app.users import bp
 
 # Declare database schemas so they can be returned as JSON objects
 user_schema = UsersSchema(exclude=("email", "password_hash"))
@@ -12,7 +13,7 @@ users_schema = UsersSchema(many=True, exclude=("email", "password_hash"))
 
 @bp.get("/get/user/profile")
 @jwt_required()
-def user_page() -> str:
+def user_page() -> tuple[Response, int] | str:
     """
     Let's users retrieve their own user information when logged in
 
@@ -26,7 +27,7 @@ def user_page() -> str:
 
 @bp.get("/get/user/profile/<string:username>")
 @jwt_required()
-def get_user(username: str) -> str:
+def get_user(username: str) -> tuple[Response, int] | Response:
     """
     Lets users retrieve a user profile when logged in
 
