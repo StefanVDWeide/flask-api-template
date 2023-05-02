@@ -9,7 +9,7 @@ import rq
 @jwt.user_lookup_loader
 def user_loader_callback(jwt_header: dict, jwt_data: dict) -> object:
     """
-    HUser loader function which uses the JWT identity to retrieve a user object. 
+    HUser loader function which uses the JWT identity to retrieve a user object.
     Method is called on protected routes
 
     Parameters
@@ -54,7 +54,7 @@ class Users(db.Model):
 
     def check_password(self, password: str) -> bool:
         """
-        Helper function to verify the password hash agains the password provided 
+        Helper function to verify the password hash agains the password provided
         by the user when logging in
 
         Parameters

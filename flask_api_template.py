@@ -10,11 +10,11 @@ app = create_app()
 @app.cli.command()
 def remove_old_jwts():
     """
-    Scan the database for JWT tokens in the Revoked Token table older than 5 days 
+    Scan the database for JWT tokens in the Revoked Token table older than 5 days
     and remove them.
     """
 
-    # Import within the function to prevent working outside of application context 
+    # Import within the function to prevent working outside of application context
     # when calling flask --help
     from app.models import RevokedTokenModel
 

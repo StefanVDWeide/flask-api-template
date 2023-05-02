@@ -23,7 +23,7 @@ user_schema = UsersDeserializingSchema()
 @jwt.token_in_blocklist_loader
 def check_if_token_in_blacklist(jwt_header, jwt_data) -> bool:
     """
-    Helper function for checking if a token is present in the database 
+    Helper function for checking if a token is present in the database
     revoked token table
 
     Parameters

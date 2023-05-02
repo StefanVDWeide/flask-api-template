@@ -15,7 +15,7 @@ def count_seconds(**kwargs: int) -> None:
     with app.app_context():
         try:
             number: int | None = kwargs.get("number")
-            
+
             if number:
                 _set_task_progress(0)
 
