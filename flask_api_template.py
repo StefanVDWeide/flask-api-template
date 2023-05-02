@@ -1,8 +1,8 @@
-from app import create_app
-from app import db
-
 from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
+
+from app import create_app, db
 
 app = create_app()
 
@@ -10,10 +10,12 @@ app = create_app()
 @app.cli.command()
 def remove_old_jwts():
     """
-    Scan the database for JWT tokens in the Revoked Token table older than 5 days and remove them.
+    Scan the database for JWT tokens in the Revoked Token table older than 5 days
+    and remove them.
     """
 
-    # Import within the function to prevent working outside of application context when calling flask --help
+    # Import within the function to prevent working outside of application context
+    # when calling flask --help
     from app.models import RevokedTokenModel
 
     delete_date = datetime.utcnow() - relativedelta(days=5)

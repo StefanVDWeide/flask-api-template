@@ -1,4 +1,4 @@
-def register_and_login_test_user(c):
+def register_and_login_test_user(c) -> str:
     """
     Helper function that makes an HTTP request to register a test user
 

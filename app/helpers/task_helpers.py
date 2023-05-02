@@ -1,4 +1,5 @@
 from rq import get_current_job
+
 from app import db
 from app.models import Tasks
 
