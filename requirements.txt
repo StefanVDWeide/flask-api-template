@@ -51,7 +51,7 @@ python-dateutil==2.8.2
 python-dotenv==1.0.0
 python-editor==1.0.4
 redis==4.5.4
-regex==2023.3.23
+regex==2023.5.5
 rich==13.3.4
 rq==1.13.0
 six==1.16.0
