@@ -55,7 +55,7 @@ regex==2023.3.23
 rich==13.3.4
 rq==1.13.0
 six==1.16.0
-SQLAlchemy==2.0.10
+SQLAlchemy==2.0.15
 toml==0.10.2
 tomli==2.0.1
 typing_extensions==4.5.0
