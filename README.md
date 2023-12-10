@@ -126,7 +126,11 @@ flask run
 ---
 
 ## PostgreSQL
-TODO
+If you want to use postgres db instead of sqlline  remove '#' characters from config.py related to postgresdb. 
+In addition to this, make sure postgresdb is running on your local machine. 
+```
+docker run -d  --name postgres  -e POSTGRES_USER=<user> -e POSTGRES_PASSWORD=<password>  -e POSTGRES_DB=<db_name> -p 5432:5432  postgres
+```
 
 ## Gunicorn
 TODO
